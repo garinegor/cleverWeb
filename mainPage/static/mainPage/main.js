@@ -14,8 +14,8 @@ scrollList.addEventListener('scroll', function () {
     }
     timer = setTimeout(function () {
         scrollList.scrollTop = Math.round(scrollList.scrollTop / elementHeight) * elementHeight;
-        showItem(items[Math.round(scrollList.scrollTop / elementHeight)]);
-    }, 500);
+        // showItem(items[Math.round(scrollList.scrollTop / elementHeight)]);
+    }, 200);
 }, false);
 
 items = [
