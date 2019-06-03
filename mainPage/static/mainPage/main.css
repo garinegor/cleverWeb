@@ -1,3 +1,12 @@
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    height: 100%;
+}
+
 .application {
     width: 300px;
     height: 130px;
@@ -22,9 +31,37 @@
 }
 
 .app-holder {
-    height: calc(100% - 56px);
+    height: 100%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
+}
+
+.scroll {
+    position: absolute;
+    color: darkgray;
+    left: 140px;
+    font-size: 1.1em;
+    overflow: auto;
+    height: 56px;
+    padding: 15px;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.page-holder {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 56px);
+    scroll-behavior: smooth;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
 }

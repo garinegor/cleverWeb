@@ -9,24 +9,35 @@
     <script type="text/javascript" src="{% static "js/Ply.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
-    <link rel="stylesheet" href="{% static "css/contextMenu.css" %}">
     <link rel="stylesheet" href="{% static "css/ply.css" %}">
     <link rel="stylesheet" href="{% static "mainPage/main.css" %}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="height: 57px;">
     <a href=".." class="navbar-brand">Clever Web</a>
+    <span>:</span>
+    <!--<div class="scroll" id="scroll-list">
+        <div class="scroll-item"><span>plugins</span></div>
+        <div class="scroll-item"><span>settings</span></div>
+        <div class="scroll-item"><span>documentation</span></div>
+    </div>-->
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">plugins</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="ddmenu"></div>
+    </div>
 </nav>
-<div class="app-holder">
-    {% for app in applications %}
-        <a class="application" style="background-color: {{ app.color }};"
-           href="{{ app.href }}">
-            <div>
-                <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
-            </div>
-            <span>{{ app.title }}</span>
-        </a>
-    {% endfor %}
+<div id="page-holder" class="page-holder">
+    <div class="page" id="plugins">
+        {% include "plugins.html" %}
+    </div>
+    <div class="page" id="settings">
+        {% include "settings.html" %}
+    </div>
+    <div class="page" id="documentations">
+        {% include "documentation.html" %}
+    </div>
 </div>
+<script type="text/javascript" src="{% static "mainPage/main.js" %}"></script>
 </body>
 </html>

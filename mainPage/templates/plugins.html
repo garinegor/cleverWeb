@@ -1,0 +1,11 @@
+<div class="app-holder">
+    {% for app in applications %}
+        <a class="application" style="background-color: {{ app.color }};"
+           href="{{ app.href }}">
+            <div>
+                <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
+            </div>
+            <span>{{ app.title }}</span>
+        </a>
+    {% endfor %}
+</div>
