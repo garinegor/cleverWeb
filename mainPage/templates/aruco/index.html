@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/fabric.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/Ply.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/dict.json" %}"></script>
+    <script type="text/javascript" src="{% static "js/contextMenu.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/design.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/contextMenu.css" %}">
+    <link rel="stylesheet" href="{% static "css/ply.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <title>Clever Web</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a href=".." class="navbar-brand">Clever Web</a>
+    <!--<img onclick="startTraining()" class="question-image" src="{% static "css/svg/question.svg" %}" alt="" />-->
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#filePicker">Открыть файл</button>
+    <div class="toggler" id="toggler" onclick="showArucoList()">
+        <div id="toggler-element" class="toggler-element"></div>
+    </div>
+</nav>
+<div class="root-container">
+    <div class="aruco-field-container col" id="aruco-field-container">
+        <canvas id="c"></canvas>
+    </div>
+    <div id="aruco-info" class="aruco-configer-container col-md-auto">
+        <div class="aruco-info col">
+            <form>
+                <div class="form-group">
+                    <label for="inputID">ID</label>
+                    <input type="number" class="form-control" id="inputID" placeholder="Aruco ID">
+                </div>
+                <div class="form-group">
+                    <label for="markerSide">Сторона, мм</label>
+                    <input type="number" class="form-control" id="markerSide" placeholder="Сторона метки">
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inputX">X, мм</label>
+                        <input type="number" class="form-control" id="inputX" placeholder="Сдвиг по оси X">
+                    </div>
+                    <div class="col">
+                        <label for="inputY">Y, мм</label>
+                        <input type="number" class="form-control" id="inputY" placeholder="Сдвиг по оси Y">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inputZ">Z, мм</label>
+                        <input type="number" class="form-control" id="inputZ" placeholder="Сдвиг по оси Z">
+                    </div>
+                    <div class="col">
+                        <label for="inputAngle">α, °</label>
+                        <input type="number" class="form-control" id="inputAngle" placeholder="Угол поворота">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group" style="width: 100%; height: 100px;" role="group" aria-label="Basic example">
+                        <button alt="Сделать нулевой" type="button" id="zerocheck" class="btn star-button"
+                                style="width: 100%;"><img id="starIcon" class="star-icon" alt=""
+                                                          src="{% static "css/svg/graystar.png" %}"/>
+                            <div style="margin: 0 auto;" id="starText">Сделать метку главной</div>
+                        </button>
+                        <button alt="Удалить выбраннызне объекты" type="button" id="delete" onclick="removeSelected()"
+                                class="btn btn-primary btn-danger delete-button" style="width: 100px; padding: 0px;"><img
+                                style="height: 40px; margin: 0 auto;" src="/static/css/svg/trash.svg" alt=""/></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="multi-aruco-info" class="aruco-configer-container col-md-auto">
+        <div class="aruco-info col">
+            <form>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="markerSide">Ширина, мм</label>
+                        <input type="number" class="form-control" id="multiMarkerWidth" placeholder="Ширина" disabled>
+                    </div>
+                    <div class="col">
+                        <label for="markerSide">Высота, мм</label>
+                        <input type="number" class="form-control" id="multiMarkerHeight" placeholder="Высота" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inputX">X, мм</label>
+                        <input type="number" class="form-control" id="multiInputX" placeholder="Сдвиг по оси X">
+                    </div>
+                    <div class="col">
+                        <label for="inputY">Y, мм</label>
+                        <input type="number" class="form-control" id="multiInputY" placeholder="Сдвиг по оси Y">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button alt="Удалить выбранные объекты" type="button" id="delete" onclick="removeSelected()"
+                            class="btn btn-primary btn-danger delete-button">
+                        <div id="starText" style="width: 100%;">Удалить</div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="arucos-info" class="aruco-configer-container col-md-auto" style="padding: 0; width: 350px;">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="nav-item heading"
+                style="width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
+                <div class="">Метки</div>
+                <div class="md-form mt-0">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked"
+            style="overflow-y: auto; display: flex; flex-direction: column; max-height: 400px; flex-wrap: nowrap;" id="marker-list">
+        </ul>
+        <ul class="nav nav-pills nav-stacked">
+            <li class="nav-item heading">
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="file-picker-container">
+    <div class="modal fade" id="filePicker" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Выберите файл</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body list-group">
+                    {% for file in files %}
+                        <button class="list-group-item list-group-item-action"
+                                onclick="openFile('{{ file }}')">{{ file }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="new-aruco" class="new-aruco" onclick="expand()">
+    <div id="hidden" class="hidden">
+        <div class="new-aruco-header">Создать</div>
+        <div onclick="createOneMarker()" class="new-aruco-button">
+            <img src="{% static "css/svg/square.svg" %}" id="aruco-pic" class="new-aruco-pic"/>
+            <div>Одну метку</div>
+        </div>
+        <div onclick="createMultipleMarkers()" class="new-aruco-button">
+            <img src="{% static "css/svg/squares.svg" %}" id="aruco-pic2" class="new-aruco-pic"/>
+            <div>Несколько меток</div>
+        </div>
+        <div onclick="createGrid()" class="new-aruco-button">
+            <img src="{% static "css/svg/cell.svg" %}" id="aruco-pic3" class="new-aruco-pic"/>
+            <div>Сетку</div>
+        </div>
+    </div>
+</button>
+<img onclick="expand()" id="aruco-plus" class="aruco-plus" src="{% static "css/svg/plus.svg" %}" alt=""/>
+<div id="aruco-send-content" onclick="generateMap()" class="aruco-send"></div>
+<img id="aruco-send" onclick="showArucoSendContent()" class="aruco-send" src="{% static "css/svg/galochka.svg" %}"
+     alt="">
+<div id="blocker" class="blocker"></div>
+<div id="hint" class="hint">
+    <div id="hint-content" class="hint-content"></div>
+    <div>
+        <button id="hint-button" type="button" class="btn btn-success">Далее</button>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static "js/tutorial.js" %}"></script>
+<script type="text/javascript" src="{% static "js/prompts.js" %}"></script>
+<script type="text/javascript" src="{% static "js/field.js" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+<script type="text/javascript" src="{% static "js/context_menu.js" %}"></script>
+</body>
+</html>
