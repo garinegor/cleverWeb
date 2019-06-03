@@ -1,4 +1,4 @@
-/*scrollList = document.getElementById("scroll-list");
+scrollList = document.getElementById("scroll-list");
 
 const elementHeight = 26.363636016845703;
 
@@ -10,12 +10,13 @@ scrollList.addEventListener('mousedown', function () {
 
 scrollList.addEventListener('scroll', function () {
     if (timer !== null) {
-        timer = null
+        clearTimeout(timer);
     }
     timer = setTimeout(function () {
         scrollList.scrollTop = Math.round(scrollList.scrollTop / elementHeight) * elementHeight;
-    }, 200);
-}, false);*/
+        showItem(items[Math.round(scrollList.scrollTop / elementHeight)]);
+    }, 500);
+}, false);
 
 items = [
     "plugins",
@@ -28,17 +29,17 @@ for (var i = 0; i < items.length; i++) {
 }
 
 function showItem(s) {
-    document.getElementById("dropdownMenuButton").innerText = s;
     var winHeight = document.documentElement.clientHeight - 56;
+    scrollList.scrollTop = items.indexOf(s) * elementHeight;
     document.getElementById("page-holder").scrollTop = items.indexOf(s) * winHeight;
     setTimeout(function () {
 
     }, 500);
 }
 
-window.onresize = function(event) {
+/*window.onresize = function(event) {
     showItem(document.getElementById("dropdownMenuButton").innerText);
-};
+};*/
 
 document.getElementById("page-holder").onscroll = function () {
     console.log(document.getElementById("page-holder").scrollTop);

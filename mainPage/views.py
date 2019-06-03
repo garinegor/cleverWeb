@@ -18,9 +18,18 @@ def home(request):
 
 def main(request):
     data = dict()
-
     with open(os.path.join(PROJECT_ROOT, 'apps.json')) as f:
-        data["applications"] = loads(f.read())
+        available_plugins = loads(f.read())
+    data["content"] = [
+        {
+            "title": "Favorite",
+            "row": available_plugins
+        },
+        {
+            "title": "Favorite X3",
+            "row": available_plugins * 4
+        }
+    ]
 
     return render(request, "main.html", data)
 
