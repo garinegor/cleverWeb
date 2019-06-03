@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Aruco Launch",
+    "icon": "aruco.svg",
+    "color": "#6E80FF",
+    "href": "/aruco"
+  },
+  {
+    "title": "File Explorer",
+    "icon": "explorer.svg",
+    "color": "#FF6057",
+    "href": "/files"
+  },
+  {
+    "title": "Scratch",
+    "icon": "scratch.svg",
+    "color": "#FFE430",
+    "href": "/blocks"
+  }
+]

@@ -6,14 +6,23 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 
-
 PATH_TO_LAUNCH = "path_to_launch"
 PATH_TO_FOLDER = "./map"
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
 def home(request):
     files = [i for i in os.listdir(PATH_TO_FOLDER) if i.split(".")[1] == "txt"]
     return render(request, "aruco/index.html", {"files": files})
+
+
+def main(request):
+    data = dict()
+
+    with open(os.path.join(PROJECT_ROOT, 'apps.json')) as f:
+        data["applications"] = loads(f.read())
+
+    return render(request, "main.html", data)
 
 
 @csrf_exempt

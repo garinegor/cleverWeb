@@ -1,0 +1,30 @@
+.application {
+    width: 300px;
+    height: 130px;
+    color: white;
+    border-radius: 20px;
+    margin: 10px;
+    text-decoration: none;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.application img {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.application span {
+    font-size: 1.6em;
+}
+
+.app-holder {
+    height: calc(100% - 56px);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}

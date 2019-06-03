@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Clever Web</title>
+    {% load static %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/Ply.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/contextMenu.css" %}">
+    <link rel="stylesheet" href="{% static "css/ply.css" %}">
+    <link rel="stylesheet" href="{% static "mainPage/main.css" %}">
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a href=".." class="navbar-brand">Clever Web</a>
+</nav>
+<div class="app-holder">
+    {% for app in applications %}
+        <a class="application" style="background-color: {{ app.color }};"
+           href="{{ app.href }}">
+            <div>
+                <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
+            </div>
+            <span>{{ app.title }}</span>
+        </a>
+    {% endfor %}
+</div>
 </body>
 </html>

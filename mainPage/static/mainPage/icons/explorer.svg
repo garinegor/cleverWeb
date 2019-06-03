@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <title/>
+    <g data-name="Windows Explorer" id="Windows_Explorer">
+        <g data-name="&lt;Group&gt;" id="_Group_">
+            <path d="M9.5,6.5H.5V4A1.5,1.5,0,0,1,2,2.5H9.5l2,2Z" data-name="&lt;Path&gt;" id="_Path_"
+                  style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round"/>
+            <g data-name="&lt;Group&gt;" id="_Group_2">
+                <line data-name="&lt;Path&gt;" id="_Path_2"
+                      style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round" x1="7.5" x2="16.5"
+                      y1="20.5" y2="20.5"/>
+                <path d="M.5,6.5V19A1.5,1.5,0,0,0,2,20.5H4.5" data-name="&lt;Path&gt;" id="_Path_3"
+                      style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round"/>
+                <path d="M19.5,20.5H22A1.5,1.5,0,0,0,23.5,19V6A1.5,1.5,0,0,0,22,4.5H11.5" data-name="&lt;Path&gt;"
+                      id="_Path_4" style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round"/>
+            </g>
+            <path d="M4.5,14v7.5h3v-6h9v6h3V14A1.5,1.5,0,0,0,18,12.5H6A1.5,1.5,0,0,0,4.5,14Z" data-name="&lt;Path&gt;"
+                  id="_Path_5" style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round"/>
+            <line data-name="&lt;Path&gt;" id="_Path_6"
+                  style="fill:none;stroke:#FFFFFF;stroke-linecap:round;stroke-linejoin:round" x1="2.5" x2="8.5" y1="4.5"
+                  y2="4.5"/>
+        </g>
+    </g>
+</svg>
