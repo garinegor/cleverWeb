@@ -1,6 +1,6 @@
 scrollList = document.getElementById("scroll-list");
 
-const elementHeight = 26.363636016845703;
+/*const elementHeight = 26.363636016845703;
 
 var timer = null;
 
@@ -9,19 +9,22 @@ scrollList.addEventListener('mousedown', function () {
 });
 
 scrollList.addEventListener('scroll', function () {
+    console.log("Scrolled");
     if (timer !== null) {
         clearTimeout(timer);
     }
     timer = setTimeout(function () {
         scrollList.scrollTop = Math.round(scrollList.scrollTop / elementHeight) * elementHeight;
-        showItem(items[Math.round(scrollList.scrollTop / elementHeight)]);
+        let winHeight = document.documentElement.clientHeight - 55;
+        document.getElementById("page-holder").scrollTop = Math.round(scrollList.scrollTop / elementHeight) * winHeight;
+        console.log("Srolled");
     }, 200);
-}, false);
+}, false);*/
 
 items = [
     "plugins",
     "settings",
-    "document"
+    "documents"
 ];
 
 for (var i = 0; i < items.length; i++) {
@@ -29,18 +32,11 @@ for (var i = 0; i < items.length; i++) {
 }
 
 function showItem(s) {
-    var winHeight = document.documentElement.clientHeight - 56;
-    scrollList.scrollTop = items.indexOf(s) * elementHeight;
+    var winHeight = document.documentElement.clientHeight - 55;
     document.getElementById("page-holder").scrollTop = items.indexOf(s) * winHeight;
-    setTimeout(function () {
-
-    }, 500);
+    document.getElementById("dropdownMenuButton").innerText = s;
 }
 
-/*window.onresize = function(event) {
+window.onresize = function(event) {
     showItem(document.getElementById("dropdownMenuButton").innerText);
-};*/
-
-document.getElementById("page-holder").onscroll = function () {
-    console.log(document.getElementById("page-holder").scrollTop);
 };

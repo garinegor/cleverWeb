@@ -31,6 +31,10 @@ def main(request):
         }
     ]
 
+    data["navbar_color"] = "#343a40"
+    data["navbar_content"] = "list"
+    data["profile_name"] = "Eegorek"
+    data["profile_image"] = "profile.svg"
     return render(request, "main.html", data)
 
 

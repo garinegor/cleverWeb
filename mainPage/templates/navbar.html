@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top cool-navbar"
+     style="background-color: {{ navbar_color }}">
+    <div class="left-part">
+        <a href=".." class="navbar-brand" style="font-size: 1.7em; padding: 8px; margin: 0;">Clever Web</a>
+        {% if navbar_content == "list" %}
+            <span style="color: darkgray; font-size: 1.6em;">:</span>
+            <div class="dropdown">
+                <button style="color: darkgray; font-size: 1.7em;" class="cool-button" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    plugins
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="ddmenu"></div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="profile-part">
+        <span>{{ profile_name }}</span>
+        <img style="width: 36px; height: 36px;" alt="" src="static/mainPage/icons/{{ profile_image }}"/>
+    </div>
+</nav>
