@@ -26,8 +26,8 @@ def main(request):
             "row": available_plugins
         },
         {
-            "title": "Favorite X3",
-            "row": available_plugins * 2
+            "title": "Favorite x10",
+            "row": available_plugins * 10
         }
     ]
 

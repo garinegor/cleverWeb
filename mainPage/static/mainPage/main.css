@@ -10,11 +10,12 @@ body {
 .cool-title {
     margin-top: 53px;
     margin-bottom: 43px;
-    font-size: 33px;
+    font-size: 28px;
 }
 
 .application {
     width: 212px;
+    min-width: 212px;
     height: 108px;
     color: white;
     border-radius: 20px;
@@ -37,8 +38,10 @@ body {
 }
 
 .app-holder {
-    height: fit-content;
+    overflow-y: hidden;
+    overflow-x: auto;
     width: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -73,7 +76,7 @@ body {
     flex-direction: column;
     width: 100%;
     height: calc(100% - 56px);
-    scroll-behavior: smooth;
+    /*scroll-behavior: smooth;*/
 }
 
 .page {
