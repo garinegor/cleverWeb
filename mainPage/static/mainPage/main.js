@@ -37,7 +37,18 @@ function showItem(s) {
     document.getElementById("dropdownMenuButton").innerText = s;
 }
 
-window.onresize = function(event) {
+window.onresize = function (event) {
     showItem(document.getElementById("dropdownMenuButton").innerText);
 };
 
+function hideSplashScreen() {
+    showItem(items[0]);
+    setTimeout(function () {
+        document.getElementById("splash").style.opacity = "0";
+        setTimeout(function () {
+            document.getElementById("splash").style.top = "100%";
+            document.getElementById("splash").style.left = "100%";
+            document.getElementById("splash").style.display = "none";
+        }, 2000);
+    }, 500);
+}

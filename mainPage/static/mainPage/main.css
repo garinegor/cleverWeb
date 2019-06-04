@@ -48,13 +48,11 @@ body {
 }
 
 .app-holder {
-    overflow-y: hidden;
-    overflow-x: auto;
     width: 100%;
     height: fit-content;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .scroll {
