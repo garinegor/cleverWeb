@@ -27,7 +27,7 @@ def main(request):
         },
         {
             "title": "Favorite X3",
-            "row": available_plugins * 4
+            "row": available_plugins * 2
         }
     ]
 

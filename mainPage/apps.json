@@ -2,19 +2,19 @@
   {
     "title": "Aruco Launch",
     "icon": "aruco.svg",
-    "color": "#6E80FF",
+    "color": "#7C7C7C",
     "href": "/aruco"
   },
   {
     "title": "File Explorer",
     "icon": "explorer.svg",
-    "color": "#FF6057",
+    "color": "#4A90B0",
     "href": "/files"
   },
   {
     "title": "Scratch",
     "icon": "scratch.svg",
-    "color": "#FFE430",
+    "color": "#EEBF70",
     "href": "/blocks"
   }
 ]
