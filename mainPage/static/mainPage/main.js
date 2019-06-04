@@ -24,7 +24,7 @@ scrollList.addEventListener('scroll', function () {
 items = [
     "plugins",
     "settings",
-    "documents"
+    "documentation"
 ];
 
 for (var i = 0; i < items.length; i++) {
@@ -40,3 +40,4 @@ function showItem(s) {
 window.onresize = function(event) {
     showItem(document.getElementById("dropdownMenuButton").innerText);
 };
+

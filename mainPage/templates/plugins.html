@@ -1,15 +1,15 @@
 <div style="width: 100%; height: 100%; padding-left: 44px; padding-right: 44px;">
     {% for row in content %}
         <h1 class="cool-title">{{ row.title }}</h1>
-            <div class="app-holder">
-                {% for app in row.row %}
-                    <a class="application" style="background-color: {{ app.color }};" href="{{ app.href }}">
-                        <div>
-                            <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
-                        </div>
-                        <span>{{ app.title }}</span>
-                    </a>
-                {% endfor %}
-            </div>
+        <div class="app-holder">
+            {% for app in row.row %}
+                <a class="application" style="background-color: {{ app.color }};" href="{{ app.href }}">
+                    <div>
+                        <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
+                    </div>
+                    <span>{{ app.title }}</span>
+                </a>
+            {% endfor %}
+        </div>
     {% endfor %}
 </div>
