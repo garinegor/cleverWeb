@@ -16,7 +16,7 @@ def home(request):
     return render(request, "aruco/index.html", {"files": files})
 
 
-def main(request):
+def plugins(request):
     data = dict()
     with open(os.path.join(PROJECT_ROOT, 'apps.json')) as f:
         available_plugins = loads(f.read())
@@ -32,10 +32,28 @@ def main(request):
     ]
 
     data["navbar_color"] = "#343a40"
-    data["navbar_content"] = "list"
+    data["navbar_title"] = "plugins"
     data["profile_name"] = "Eegorek"
     data["profile_image"] = "profile.svg"
-    return render(request, "main.html", data)
+    return render(request, "cleverWeb/plugins.html", data)
+
+
+def settings(request):
+    data = dict()
+    data["navbar_color"] = "#343a40"
+    data["navbar_title"] = "settings"
+    data["profile_name"] = "Eegorek"
+    data["profile_image"] = "profile.svg"
+    return render(request, "cleverWeb/settings.html", data)
+
+
+def docs(request):
+    data = dict()
+    data["navbar_color"] = "#343a40"
+    data["navbar_title"] = "documentation"
+    data["profile_name"] = "Eegorek"
+    data["profile_image"] = "profile.svg"
+    return render(request, "cleverWeb/documentation.html", data)
 
 
 @csrf_exempt

@@ -10,21 +10,27 @@
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/ply.css" %}">
-    <link rel="stylesheet" href="{% static "css/splash.css" %}">
     <link rel="stylesheet" href="{% static "mainPage/main.css" %}">
 </head>
 <body>
-{% include "splash.html" %}
 {% include "navbar.html" %}
 <div id="page-holder" class="page-holder">
     <div class="page" id="plugins">
-        {% include "plugins.html" %}
-    </div>
-    <div class="page" id="settings">
-        {% include "settings.html" %}
-    </div>
-    <div class="page" id="documentations">
-        {% include "documentation.html" %}
+        <div style="width: 100%; height: 100%; padding-left: 44px; padding-right: 44px; overflow: auto; padding-top: 53px;">
+            {% for row in content %}
+                <h1 class="cool-title">{{ row.title }}</h1>
+                <div class="app-holder">
+                    {% for app in row.row %}
+                        <a class="application" style="background-color: {{ app.color }};" href="{{ app.href }}">
+                            <div>
+                                <img alt="" src="static/mainPage/icons/{{ app.icon }}"/>
+                            </div>
+                            <span>{{ app.title }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="{% static "mainPage/main.js" %}"></script>

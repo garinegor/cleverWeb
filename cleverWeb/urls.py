@@ -1,23 +1,15 @@
-"""cleverWeb URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url
+import os
+from django.conf.urls import url, include, re_path
 from django.contrib import admin
-from mainPage import views
+from json import loads
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+path_to_plugins = os.path.join(PROJECT_ROOT, '../cleverWeb/plugins_urls.json')
+plugins_paths = loads(open(path_to_plugins).read())["paths"]
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('', views.main)
 ]
+
+for i in plugins_paths:
+    urlpatterns.append(re_path(i["name"], include(i["url"])))
