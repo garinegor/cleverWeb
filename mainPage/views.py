@@ -64,3 +64,22 @@ def get_wifi_list(request):
     data = dict()
     data["available"] = ["kek", "kek1", "kek2", "kek3"]  # первый эдемент - сеть к которой подключен
     return JsonResponse(data)
+
+
+def config_wifi(request):  # конфигурация сети самого клевера
+    net_name = request.GET.get("ssid")
+    net_password = request.GET.get("password")
+    return JsonResponse({"status": "ok"})
+
+
+def connect_wifi(request):  # конфигурация сети к которой он подключится
+    net_name = request.GET.get("ssid")
+    net_password = request.GET.get("password")
+    return JsonResponse({"status": "ok"})
+
+
+def config_camera(request):
+    config_string = request.GET.get("x") + " " + request.GET.get("y") + " " + request.GET.get(
+        "z") + " " + request.GET.get("yaw") + " " + request.GET.get("pitch") + " " + request.GET.get("roll")
+    #smth like "0.5 0.4 0.3 3.1415 2.1415 1.1415"
+    return JsonResponse({"status": "ok"})

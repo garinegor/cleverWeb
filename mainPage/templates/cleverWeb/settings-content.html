@@ -14,7 +14,7 @@
                        value="{{ wifi.own_pass }}">
             </div>
             <div class="btn-group" style="margin-left: 15px;" role="group">
-                <button onclick="alert('kek')" class="btn btn-success">Save</button>
+                <button onclick="config()" class="btn btn-success">Save</button>
             </div>
         </div>
         <div style="width: 50%;">
@@ -33,7 +33,7 @@
             </div>
             <div class="btn-group" style="margin-left: 15px;" role="group">
                 <button type="button" onclick="refresh()" class="btn btn-secondary">Refresh</button>
-                <button type="button" class="btn btn-success">Connect</button>
+                <button type="button" onclick="connect()" class="btn btn-success">Connect</button>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="btn-group" style="margin-left: 15px;" role="group">
-                <button onclick="alert('kek')" class="btn btn-success">Save</button>
+                <button onclick="cam_config()" class="btn btn-success">Save</button>
             </div>
         </div>
         <div style="width: 50%;">
@@ -87,6 +87,46 @@
         padding: 30px;
     }
 </style>
+<script>
+    function config() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/wifi/config?ssid=" + document.getElementById("inputSSID").value + "&password=" + document.getElementById("inputPassword").value, false);
+        req.send();
+        if (req.status != 200) {
+            //error
+        } else {
+            alert("Saved");
+        }
+    }
+
+    function connect() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/wifi/connect?ssid=" + document.getElementById("inputState2").value + "&password=" + document.getElementById("inputPassword2").value, false);
+        req.send();
+        if (req.status != 200) {
+            //error
+        } else {
+            alert("connected");
+        }
+    }
+
+    function cam_config() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/launch/cam_config?x=" + document.getElementById("shiftX").value.toString() +
+            "&y=" + document.getElementById("shiftY").value.toString() +
+            "&z=" + document.getElementById("shiftZ").value.toString() +
+            "&yaw=" + document.getElementById("angleYaw").value.toString() +
+            "&pitch=" + document.getElementById("anglePitch").value.toString() +
+            "&roll=" + document.getElementById("angleRoll").value.toString()
+            , false);
+        req.send();
+        if (req.status != 200) {
+            //error
+        } else {
+            alert("cam config ok");
+        }
+    }
+</script>
 <script>
     refresh();
 
