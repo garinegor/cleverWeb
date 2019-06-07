@@ -15,12 +15,63 @@
 <body>
 {% include "navbar.html" %}
 <div id="page-holder" class="page-holder">
-    <div class="page" id="plugins">
-        <div style="width: 100%; height: 100%; background-color: #41ab4d">
+    <div class="page">
+        <div class="settings-container">
+            <div class="setting-menu" id="menu">
 
+            </div>
+            <div class="setting-content">
+                {% include "cleverWeb/settings-content.html" %}
+            </div>
+            <div class="setting-menu">
+                <div style="display: flex; flex-direction: row; height: 90px; align-items: center">
+                    <img style="width: 50px; height: 50px; margin: 20px" alt=""
+                         src={% static "mainPage/icons/question.svg" %}/>
+                    <div style="color: darkgray">Please restart your Сlever after changing some of this settings</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{% static "mainPage/main.js" %}"></script>
+<script>
+    var data_struct = [
+        {
+            name: "Network",
+            sub_struct: [
+                "Change Wi-Fi configuration",
+                "Connect to WiFi"
+            ]
+        },
+        {
+            name: "Launch",
+            sub_struct: [
+                "Camera configuration",
+                "Launch configuration",
+                "Aruco configuration"
+            ]
+        }
+    ];
+
+    menu = document.getElementById("menu");
+
+    for (var i = 0; i < data_struct.length; i++) {
+        menu.innerHTML += "<div id='" + i.toString() + "par' class='menu-el'>" +
+            "<div>" + data_struct[i].name + "</div><img class='menu-el-img' alt='' src='/static/mainPage/icons/arrow.svg' id='" + i.toString() + "img' /></div>";
+        menu.innerHTML += "<div class='menu-el-container' id='" + i.toString() + "'></div>";
+        expand(i);
+    }
+
+    function expand(j) {
+        el = document.getElementById(j.toString());
+        for (var i = 0; i < data_struct[j].sub_struct.length; i++) {
+            el.innerHTML += "<div class='menu-el submenu'>" + data_struct[j].sub_struct[i] + "</div>";
+        }
+        document.getElementById(j.toString() + "par").onclick = function () {
+            hide(j);
+        };
+        el.style.height = "auto";
+        document.getElementById(j.toString() + "img").style.transform = "rotate(0deg)";
+    }
+</script>
 </body>
 </html>

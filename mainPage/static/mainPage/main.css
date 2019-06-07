@@ -129,5 +129,60 @@ body {
 .navbar-img {
     width: 36px;
     height: 36px;
-    fill: red !important;
+}
+
+.setting-menu {
+    background-color: #404040;
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.setting-content {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-el {
+    width: 100%;
+    padding: 10px;
+    background-color: #404040;
+    color: #f4f4f4;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu-el-container {
+    display: flex;
+    flex-direction: column;
+    height: 0px;
+    transition: .5s;
+}
+
+.submenu {
+    cursor: pointer;
+    transition: .5s;
+    background-color: #606060;
+}
+
+.submenu:hover {
+    background-color: #505050;
+}
+
+.menu-el-img {
+    transition: .5s;
+    width: 38px;
+    align-content: center;
+    height: 38px;
+    transform: rotate(-90deg);
 }

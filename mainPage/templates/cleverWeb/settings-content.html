@@ -1,0 +1,152 @@
+<div class="settings-content">
+    <h3 style="margin: 15px">Network</h3>
+    <div style="display: flex; flex-direction: row; width: 100%">
+        <div style="width: 50%;">
+            <div class="form-group col-md-auto">
+                <label for="inputSSID">SSID</label>
+                <input id="inputSSID" type="text" class="form-control" aria-describedby="ssidHelp"
+                       value="{{ wifi.own_name }}" placeholder="SSID">
+                <small id="ssidHelp" class="form-text text-muted">Your Clever WiFi hotspot configuration</small>
+            </div>
+            <div class="form-group col-md-auto">
+                <label for="inputPassword">Password</label>
+                <input id="inputPassword" type="password" placeholder="Password" class="form-control"
+                       value="{{ wifi.own_pass }}">
+            </div>
+            <div class="btn-group" style="margin-left: 15px;" role="group">
+                <button onclick="alert('kek')" class="btn btn-success">Save</button>
+            </div>
+        </div>
+        <div style="width: 50%;">
+            <div class="form-group col-md-auto">
+                <label for="inputState2">SSID</label>
+                <select id="inputState2" class="form-control">
+                    <option selected>{{ wifi.current }}</option>
+                </select>
+                <small id="ssidHelp2" class="form-text text-muted">WiFi hotspot configuration that Clever can connect
+                </small>
+            </div>
+            <div class="form-group col-md-auto">
+                <label for="inputPassword2">Password</label>
+                <input id="inputPassword2" type="password" placeholder="Password" class="form-control"
+                       value="{{ wifi.pass }}">
+            </div>
+            <div class="btn-group" style="margin-left: 15px;" role="group">
+                <button type="button" onclick="refresh()" class="btn btn-secondary">Refresh</button>
+                <button type="button" class="btn btn-success">Connect</button>
+            </div>
+        </div>
+    </div>
+
+    <h3 style="margin: 15px; margin-top: 25px;">Launch</h3>
+    <div style="display: flex; flex-direction: row; width: 100%">
+        <div style="width: 33%;">
+            <div class="form-group col-md-auto">
+                <label for="inputStateCam">Camera orientation</label>
+                <select id="inputStateCam" class="form-control">
+                    <option value="5" selected>Custom</option>
+                    <option value="0">The camera is pointing down, plume back</option>
+                    <option value="1">The camera is pointing down, plume forward.</option>
+                    <option value="2">The camera is pointing upwards, plume back</option>
+                    <option value="3">The camera is pointing upwards, plume forward</option>
+                </select>
+            </div>
+            <div class="form-group col-md-auto">
+                <div class="row">
+                    <div class="col">
+                        <label>Shift X/Y/Z</label>
+                        <input id="shiftX" type="number" class="form-control" placeholder="Shift X">
+                        <input id="shiftY" style="margin-top: 8px; margin-bottom: 8px;" type="number"
+                               class="form-control"
+                               placeholder="Shift Y">
+                        <input id="shiftZ" type="number" class="form-control" placeholder="Shift Z">
+                    </div>
+                    <div class="col">
+                        <label>Angle Yaw/Pitch/Roll</label>
+                        <input id="angleYaw" type="number" class="form-control" placeholder="Angle yaw">
+                        <input id="anglePitch" style="margin-top: 8px; margin-bottom: 8px;" type="number"
+                               class="form-control"
+                               placeholder="Angle pitch">
+                        <input id="angleRoll" type="number" class="form-control" placeholder="Angle roll"></div>
+                </div>
+            </div>
+            <div class="btn-group" style="margin-left: 15px;" role="group">
+                <button onclick="alert('kek')" class="btn btn-success">Save</button>
+            </div>
+        </div>
+        <div style="width: 50%;">
+
+        </div>
+    </div>
+</div>
+<style lang="css">
+    .setting-content {
+        width: 100%;
+        height: 100%;
+        background-color: #f5f5f5;
+        padding: 30px;
+    }
+</style>
+<script>
+    refresh();
+
+    function refresh() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/wifi/available", false);
+        req.send();
+        if (req.status != 200) {
+            refresh();
+        } else {
+            var wifis = JSON.parse(req.responseText).available;
+            document.getElementById("inputState2").innerHTML = "";
+            for (let i = 0; i < wifis.length; i++) {
+                document.getElementById("inputState2").innerHTML += "<option>" + wifis[i] + "</option>";
+            }
+        }
+    }
+</script>
+<script>
+    var sets = [
+        [{{ camera.shiftx }}, {{ camera.shifty }}, {{ camera.shiftz }}, {{ camera.angleYaw }}, {{ camera.anglePitch }}, {{ camera.angleRoll }}],
+        [0.05, 0, -0.07, -1.5707963, 0, 3.1415926],
+        [0.05, 0, -0.07, 1.5707963, 0, 3.1415926],
+        [0.05, 0, 0.07, 1.5707963, 0, 0],
+        [0.05, 0, 0.07, -1.5707963, 0, 0]
+    ];
+
+    document.getElementById("shiftX").value = sets[0][0];
+    document.getElementById("shiftY").value = sets[0][1];
+    document.getElementById("shiftZ").value = sets[0][2];
+    document.getElementById("angleYaw").value = sets[0][3];
+    document.getElementById("anglePitch").value = sets[0][4];
+    document.getElementById("angleRoll").value = sets[0][5];
+
+    document.getElementById("shiftX").onchange = function () {
+        sets[0][0] = document.getElementById("shiftX").value;
+    };
+    document.getElementById("shiftY").onchange = function () {
+        sets[0][1] = document.getElementById("shiftY").value;
+    };
+    document.getElementById("shiftZ").onchange = function () {
+        sets[0][2] = document.getElementById("shiftZ").value;
+    };
+    document.getElementById("angleYaw").onchange = function () {
+        sets[0][3] = document.getElementById("angleYaw").value;
+    };
+    document.getElementById("anglePitch").onchange = function () {
+        sets[0][4] = document.getElementById("anglePitch").value;
+    };
+    document.getElementById("angleRoll").onchange = function () {
+        sets[0][5] = document.getElementById("angleRoll").value;
+    };
+
+    document.getElementById("inputStateCam").onchange = function () {
+        var set = sets[document.getElementById("inputStateCam").selectedIndex];
+        document.getElementById("shiftX").value = set[0];
+        document.getElementById("shiftY").value = set[1];
+        document.getElementById("shiftZ").value = set[2];
+        document.getElementById("angleYaw").value = set[3];
+        document.getElementById("anglePitch").value = set[4];
+        document.getElementById("angleRoll").value = set[5];
+    }
+</script>

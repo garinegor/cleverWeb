@@ -14,9 +14,9 @@
     </div>
     <div class="profile-part">
         <span>{{ profile_name }}</span>
-        <a href="profile"><img class="navbar-img" alt="" src="static/mainPage/icons/{{ profile_image }}"/></a>
-        <a href="settings"><img class="navbar-img" style="margin-left: 10px; margin-right: 10px;" alt=""
-                src="{% static "mainPage/icons/settings.svg" %}"/></a>
-        <a href="docs"><img class="navbar-img" alt="" src="{% static "mainPage/icons/docs.svg" %}"/></a>
+        <a href="profile"><img class="navbar-img svg" alt="" src="{% static "mainPage/icons/profile.svg" %}"/></a>
+        <a href="settings"><img alt="Settings" class="navbar-img svg" style="margin-right: 12px; margin-left: 14px;"
+                                src="{% static "mainPage/icons/settings.svg" %}"/></a>
+        <a href="docs"><img alt="Documentation" class="navbar-img svg" src="{% static "mainPage/icons/docs.svg" %}"/></a>
     </div>
 </nav>
