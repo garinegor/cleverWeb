@@ -1,3 +1,4 @@
+{% load static %}
 <div class="settings-content">
     <h3 style="margin: 15px">Network</h3>
     <div style="display: flex; flex-direction: row; width: 100%">
@@ -45,6 +46,7 @@
                 <label for="inputStateCam">Camera orientation</label>
                 <select id="inputStateCam" class="form-control">
                     <option value="5" selected>Custom</option>
+                    <!--<option>Not custom</option>-->
                     <option value="0">The camera is pointing down, plume back</option>
                     <option value="1">The camera is pointing down, plume forward.</option>
                     <option value="2">The camera is pointing upwards, plume back</option>
@@ -52,6 +54,25 @@
                 </select>
             </div>
             <div class="form-group col-md-auto">
+                <!--<div class="cam-config-holder">
+                    <div>
+                        <div class="cool-cam">
+                            <button></button>
+                            <img alt="" src={% static "mainPage/icons/longarrow.svg" %}/>
+                            <button></button>
+                        </div>
+                    </div>
+                    <div>Vertical orientation:
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>Up
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="options" id="option2" autocomplete="off">Down
+                            </label>
+                        </div>
+                    </div>
+                </div>-->
                 <div class="row">
                     <div class="col">
                         <label>Shift X/Y/Z</label>
@@ -74,8 +95,128 @@
                 <button onclick="cam_config()" class="btn btn-success">Save</button>
             </div>
         </div>
-        <div style="width: 50%;">
-
+        <div style="width: 33%;">
+            <div class="form-group col-md-auto">
+                <label>Clever configuration</label>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_detect">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_map">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_detect">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_map">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_vpe">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_vpe">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_vpe">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_vpe">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group" style="margin-left: 15px;" role="group">
+                <button onclick="alert('saved')" class="btn btn-success">Save</button>
+            </div>
+        </div>
+        <div style="width: 33%;">
+            <div class="form-group col-md-auto">
+                <label for="arucoMapSelect">Aruco configuration</label>
+                <select class="form-control" id="arucoMapSelect">
+                    {% for map in aruco.maps %}
+                        <option>{{ map }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-auto">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_detect">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_map">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input readonly type="text" class="form-control" value="aruco_vpe">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group" style="margin-left: 15px;" role="group">
+                <button onclick="alert('aruco')" class="btn btn-success">Save</button>
+            </div>
         </div>
     </div>
 </div>
@@ -86,6 +227,37 @@
         background-color: #f5f5f5;
         padding: 30px;
     }
+
+    .cam-config-holder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    /*.cool-cam {
+        border: 2px solid #707070;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        width: 120px;
+        height: 120px;
+        padding: 20px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cool-cam img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .cool-cam button {
+        width: 10px;
+        height: 10px;
+        background-color: #4A90B0;
+        border: none;
+    }*/
 </style>
 <script>
     function config() {
@@ -181,6 +353,24 @@
     };
 
     document.getElementById("inputStateCam").onchange = function () {
+        /*if (document.getElementById("inputStateCam").selectedIndex === 0) {
+            document.getElementById("camHolder").innerHTML = '<div class="row">\n' +
+                '                    <div class="col">\n' +
+                '                        <label>Shift X/Y/Z</label>\n' +
+                '                        <input id="shiftX" type="number" class="form-control" placeholder="Shift X">\n' +
+                '                        <input id="shiftY" style="margin-top: 8px; margin-bottom: 8px;" type="number"\n' +
+                '                               class="form-control"\n' +
+                '                               placeholder="Shift Y">\n' +
+                '                        <input id="shiftZ" type="number" class="form-control" placeholder="Shift Z">\n' +
+                '                    </div>\n' +
+                '                    <div class="col">\n' +
+                '                        <label>Angle Yaw/Pitch/Roll</label>\n' +
+                '                        <input id="angleYaw" type="number" class="form-control" placeholder="Angle yaw">\n' +
+                '                        <input id="anglePitch" style="margin-top: 8px; margin-bottom: 8px;" type="number"\n' +
+                '                               class="form-control"\n' +
+                '                               placeholder="Angle pitch">\n' +
+                '                        <input id="angleRoll" type="number" class="form-control" placeholder="Angle roll"></div>\n' +
+                '                </div>';*/
         var set = sets[document.getElementById("inputStateCam").selectedIndex];
         document.getElementById("shiftX").value = set[0];
         document.getElementById("shiftY").value = set[1];
@@ -188,5 +378,8 @@
         document.getElementById("angleYaw").value = set[3];
         document.getElementById("anglePitch").value = set[4];
         document.getElementById("angleRoll").value = set[5];
+        /*} else {
+
+        }*/
     }
 </script>

@@ -46,6 +46,9 @@ def settings(request):
         "anglePitch": 2.1415,
         "angleRoll": 1.1415,
     }
+    data["aruco"] = {
+        "maps": ["map.txt", "office.txt", "kek.txt"]
+    }
     data["navbar_color"] = "#343a40"
     data["navbar_title"] = "settings"
     data["profile_name"] = "Eegorek"
@@ -62,7 +65,7 @@ def docs(request):
 
 def get_wifi_list(request):
     data = dict()
-    data["available"] = ["kek", "kek1", "kek2", "kek3"]  # первый эдемент - сеть к которой подключен
+    data["available"] = ["COEX Tower", "kek1", "kek2", "kek3"]  # первый эдемент - сеть к которой подключен
     return JsonResponse(data)
 
 
