@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WiFi configuration</title>
+    {% load static %}
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "mainPage/main.css" %}">
+</head>
+<body>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <div>
+        <div class="title-holder"><h3 id="title">AP</h3><label class="switch">
+            <input id="toggler" onchange="swap(true);" type="checkbox">
+            <span class="slider round"></span>
+        </label></div>
+        <div class="form-group col-md-auto">
+            <label for="inputState2">SSID</label>
+            <div id="ssid_content">
+                <select id="inputState2" class="form-control">
+                    <option selected>{{ wifi.current }}</option>
+                </select>
+            </div>
+            <small id="ssidHelp2" class="form-text text-muted">WiFi hotspot configuration that Clever can connect
+            </small>
+        </div>
+        <div class="form-group col-md-auto">
+            <label for="inputPassword2">Password</label>
+            <input id="inputPassword2" type="password" placeholder="Password" class="form-control"
+                   value="{{ wifi.pass }}">
+        </div>
+        <div class="btn-group" style="margin-left: 15px;" role="group">
+            <button id="butt_ref" type="button" onclick="refresh()" class="btn btn-secondary">Refresh</button>
+            <button id="butt_save" type="button" onclick="connect()" class="btn btn-success">Connect</button>
+        </div>
+    </div>
+</div>
+<script>
+    refresh();
+
+    function refresh() {
+        var req = new XMLHttpRequest();
+        req.open("GET", "/wifi/available", false);
+        req.send();
+        if (req.status !== 200) {
+            refresh();
+        } else {
+            var wifis = JSON.parse(req.responseText).available;
+            document.getElementById("inputState2").innerHTML = "";
+            for (let i = 0; i < wifis.length; i++) {
+                document.getElementById("inputState2").innerHTML += "<option>" + wifis[i] + "</option>";
+            }
+        }
+    }
+</script>
+<script>
+    var own_net_name = "{{ wifi.own_name }}";
+
+    function swap(b) {
+        if (b) {
+            document.getElementById('title').innerText = 'Client';
+            document.getElementById('ssid_content').innerHTML = '<input onchange="kek()" id="inputSSID" type="text" class="form-control" aria-describedby="ssidHelp"\n' +
+                'value="' + own_net_name + '" placeholder="SSID">';
+            document.getElementById('ssidHelp2').innerText = 'Your Clever WiFi hotspot configuration';
+            document.getElementById('butt_ref').innerText = 'Reset';
+            document.getElementById('butt_save').innerText = 'Save';
+        } else {
+            document.getElementById('title').innerText = 'AP';
+            document.getElementById('ssid_content').innerHTML = '<select id="inputState2" class="form-control"></select>';
+            document.getElementById('ssidHelp2').innerText = 'WiFi hotspot configuration that Clever can connect';
+            refresh();
+            document.getElementById('butt_ref').innerText = 'Refresh';
+            document.getElementById('butt_save').innerText = 'Connect';
+        }
+        document.getElementById('toggler').onchange = function () {
+            swap(!b);
+        };
+    }
+
+    function kek() {
+        own_net_name = document.getElementById("inputSSID").value;
+    }
+</script>
+</body>
+</html>

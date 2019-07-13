@@ -84,5 +84,16 @@ def connect_wifi(request):  # конфигурация сети к которо�
 def config_camera(request):
     config_string = request.GET.get("x") + " " + request.GET.get("y") + " " + request.GET.get(
         "z") + " " + request.GET.get("yaw") + " " + request.GET.get("pitch") + " " + request.GET.get("roll")
-    #smth like "0.5 0.4 0.3 3.1415 2.1415 1.1415"
+    # smth like "0.5 0.4 0.3 3.1415 2.1415 1.1415"
     return JsonResponse({"status": "ok"})
+
+
+def wifi(request):
+    data = dict()
+    data["wifi"] = {
+        "current": "COEX Tower",
+        "pass": "somewifipassword",
+        "own_name": "CLEVERWEB",
+        "own_pass": "cleverwifi"
+    }
+    return render(request, 'cleverWeb/wifi_settings.html', data)
