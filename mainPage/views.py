@@ -96,4 +96,5 @@ def wifi(request):
         "own_name": "CLEVERWEB",
         "own_pass": "cleverwifi"
     }
+    data["navbar_title"] = "network configuration"
     return render(request, 'cleverWeb/wifi_settings.html', data)
